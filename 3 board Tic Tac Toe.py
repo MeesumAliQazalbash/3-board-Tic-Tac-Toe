@@ -3,9 +3,7 @@ board2 = [' ' for y in range(10)]
 board3 = [' ' for z in range(10)]
 
 Player1 = input("Player1 please enter your name: ")
-HUID1 = input(f"{Player1} enter your HU ID: ")
 Player2 = input("Player2 please enter your name: ")
-HUID2 = input(f"{Player2} enter your HU ID: ")
 
 def rules():
     print("""    1. There are 3 boards, each of 3 by 3 dimension.
@@ -135,9 +133,6 @@ def main():
         start = pd.Timestamp.now()
         printBoard(board1, board2, board3)
         count = 0
-        import csv
-        csv_file = open("data.csv", "a", newline="")
-        writer = csv.writer(csv_file)
         while True:
             bonum = player1Move()
             printBoard(board1, board2, board3)
@@ -147,7 +142,6 @@ def main():
             if count == 3:
                 print(f"{Player1} wins")
                 print(f"{Player1} took {pd.Timestamp.now() - start} time and {steps} steps to win the game")
-                state = (Player1, HUID1, Player2, HUID2, Player1, steps, pd.Timestamp.now() - start)
                 break
             bonum = player2Move()
             printBoard(board1, board2, board3)
@@ -157,12 +151,8 @@ def main():
             if count == 3:
                 print(f"{Player2} wins")
                 print(f"{Player2} took {pd.Timestamp.now() - start} time and {steps} steps to win the game")
-                state = (Player1, HUID1, Player2, HUID2, Player2, steps, pd.Timestamp.now() - start)
                 break
-        writer.writerow(state)
-        csv_file.close()
     else:
         print("Thanks You :)")
-
 
 main()
